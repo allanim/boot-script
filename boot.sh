@@ -22,9 +22,7 @@ if [ "x$JARFILE" = "x" ]; then
 fi
 
 
-#
-# APP_SERVICE_LINK="/etc/init.d/$APP_NAME"
-APP_SERVICE_LINK="/Volumes/WorkSpace/git/spring-script/test/$APP_NAME"
+APP_SERVICE_LINK="/etc/init.d/$APP_NAME"
 GIT_SOURCES_DIR="git-sources";
 
 # ANSI Colors
@@ -67,8 +65,7 @@ copyLibrary() {
 }
 
 createService() {
-    # sudo ln -s "$THIS_DIR/$JARFILE" "$APP_SERVICE_LINK"
-    ln -s "$THIS_DIR/$JARFILE" "$APP_SERVICE_LINK"
+    sudo ln -s "$THIS_DIR/$JARFILE" "$APP_SERVICE_LINK"
 }
 
 case "$1" in
@@ -91,7 +88,6 @@ case "$1" in
         gradleBuild;
         copyLibrary;
         echoGreen "Deployed $APP_NAME"
-        sudo service "$APP_NAME" restart
         ;;
     start)
         isInstalled || { exit $?; } 
